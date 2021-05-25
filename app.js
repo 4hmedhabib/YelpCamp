@@ -4,6 +4,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
+const Joi = require('joi');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground/campground');
 
@@ -50,7 +51,21 @@ app.get('/campgrounds/new', (req, res) => {
 
 app.post('/campgrounds', catchAsync(async(req, res, next) => {
     // Data Validation
+    const campgroundSchema = Joi.object({
+        campground: Joi.object({
+            title: Joi.string().required(),
+            image: Joi.string().required(),
+            price: Joi.number().required().min(0),
+            description: Joi.string().required(),
+            location: Joi.string().required()
+        }).required()
+    });
 
+    const { error } = campgroundSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map((el) => el.message).join(',');
+        throw new ExpressError(msg, 400)
+    }
 
     const camp = await Campground(req.body.campground, { runValidators: true });
     await camp.save()
