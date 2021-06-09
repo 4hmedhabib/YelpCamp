@@ -15,7 +15,7 @@ const db = mongoose.connect('mongodb://localhost:27017/yelp-camp', {
 const reviewSchema = new Schema({
     rating: {
         type: Number,
-        min: 0,
+        min: 1,
         max: 5
     },
     body: {
