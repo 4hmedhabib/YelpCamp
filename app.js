@@ -45,12 +45,12 @@ const db = mongoose.connect('mongodb://localhost:27017/yelp-camp', {
     });
 // ===============================================================
 
-// SETS DECALRE
+// SETS
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// USE DECLARE
+// USES
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));

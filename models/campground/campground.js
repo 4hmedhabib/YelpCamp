@@ -8,8 +8,9 @@ const db = mongoose.connect('mongodb://localhost:27017/yelp-camp', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
 }).then(() => {
-    console.log('DATABASE CONNECTED!!!')
+    console.log('DATABASE SUCCESSFULLY CONNECTED!!!')
 }).catch((error) => {
     console.log('CONNECTION ERROR!')
     console.log(error)
