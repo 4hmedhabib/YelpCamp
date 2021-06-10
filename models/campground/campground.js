@@ -3,19 +3,6 @@ const Review = require('./review')
 const Schema = mongoose.Schema;
 
 
-// CONNECT TO DB
-const db = mongoose.connect('mongodb://localhost:27017/yelp-camp', {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-}).then(() => {
-    console.log('DATABASE SUCCESSFULLY CONNECTED!!!')
-}).catch((error) => {
-    console.log('CONNECTION ERROR!')
-    console.log(error)
-})
-
 const CampgroundSchema = new Schema({
     title: String,
     location: String,
