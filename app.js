@@ -1,16 +1,13 @@
 const express = require('express');
+const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
-
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
-
 const campgroundRoute = require('./routes/campgrounds');
 const reviewRoute = require('./routes/reviews');
-
 const mongoose = require('mongoose');
-
 
 // Data Validation
 const validateCampground = (req, res, next) => {
@@ -32,6 +29,7 @@ const validateReview = (req, res, next) => {
         next()
     }
 };
+// ========================================================
 
 // CONNECT TO DB
 const db = mongoose.connect('mongodb://localhost:27017/yelp-camp', {
@@ -45,9 +43,7 @@ const db = mongoose.connect('mongodb://localhost:27017/yelp-camp', {
     .catch((err) => {
         console.log('CONNECTION ERROR!!!');
     });
-
-
-const app = express()
+// ===============================================================
 
 // SETS DECALRE
 app.engine('ejs', ejsMate);
@@ -57,13 +53,10 @@ app.set('views', path.join(__dirname, 'views'));
 // USE DECLARE
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
-app.use(express.static('public'))
-
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 // ==========
-
 app.get('/', (req, res) => {
     res.send('HOME PAGE');
 });
