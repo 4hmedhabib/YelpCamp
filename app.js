@@ -3,6 +3,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
+const flash = require('connect-flash');
 const app = express();
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
@@ -47,11 +48,18 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig))
 
+app.use(flash());
+
 // Routes
 // ==========
 app.get('/', (req, res) => {
     res.send('HOME PAGE');
 });
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    next();
+})
 
 app.use('/campgrounds', campgroundRoute);
 app.use('/', reviewRoute);
