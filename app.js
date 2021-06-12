@@ -4,6 +4,8 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local')
 const app = express();
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
@@ -49,6 +51,9 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 
 app.use(flash());
+
+
+
 
 // Routes
 // ==========
