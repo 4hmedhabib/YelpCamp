@@ -11,6 +11,7 @@ const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
 const campgroundRoute = require('./routes/campgrounds');
 const reviewRoute = require('./routes/reviews');
+const User = require('./models/campground/user')
 const mongoose = require('mongoose');
 
 
@@ -52,8 +53,19 @@ app.use(session(sessionConfig))
 
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 
+app.get('/fakeUser', async(req, res) => {
+    const user = await new User({ email: 'info.ahmed@gmail.com', username: 'ahmed12' })
+    const newUser = await User.register(user, 'asdfadfa');
+    res.send(newUser)
+})
 
 // Routes
 // ==========
