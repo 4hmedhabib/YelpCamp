@@ -9,8 +9,9 @@ const LocalStrategy = require('passport-local')
 const app = express();
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
-const campgroundRoute = require('./routes/campgrounds');
-const reviewRoute = require('./routes/reviews');
+const campgroundRoutes = require('./routes/campgrounds');
+const reviewRoutes = require('./routes/reviews');
+const userRoutes = require('./routes/users')
 const User = require('./models/campground/user')
 const mongoose = require('mongoose');
 
@@ -61,12 +62,6 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 
-app.get('/fakeUser', async(req, res) => {
-    const user = await new User({ email: 'info.ahmed@gmail.com', username: 'ahmed12' })
-    const newUser = await User.register(user, 'asdfadfa');
-    res.send(newUser)
-})
-
 // Routes
 // ==========
 app.get('/', (req, res) => {
@@ -79,8 +74,10 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/campgrounds', campgroundRoute);
-app.use('/', reviewRoute);
+app.use('/campgrounds', campgroundRoutes);
+app.use('/campgrounds', reviewRoutes);
+app.use('/', userRoutes)
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found!', 404))

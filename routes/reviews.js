@@ -17,7 +17,7 @@ const validateReview = (req, res, next) => {
     }
 }
 
-router.post('/campgrounds/:id/reviews', validateReview, catchAsync(async(req, res, next) => {
+router.post('/:id/reviews', validateReview, catchAsync(async(req, res, next) => {
 
     const campground = await Campground.findById(req.params.id);
     const review = new Review(req.body.review);
@@ -30,7 +30,7 @@ router.post('/campgrounds/:id/reviews', validateReview, catchAsync(async(req, re
     res.redirect(`/campgrounds/${campground._id}`)
 }));
 
-router.delete('/campgrounds/:id/reviews/:reviewId', async(req, res, next) => {
+router.delete('/:id/reviews/:reviewId', async(req, res, next) => {
     const { id, reviewId } = req.params;
     await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId)
