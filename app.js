@@ -68,6 +68,9 @@ app.get('/', (req, res) => {
     res.send('HOME PAGE');
 });
 
+
+
+// Flash Middle Ware
 app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
@@ -78,6 +81,10 @@ app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds', reviewRoutes);
 app.use('/', userRoutes)
 
+app.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success', "Goodbye!, You're Logged Out!")
+});
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found!', 404))
