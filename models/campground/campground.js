@@ -6,6 +6,10 @@ const Schema = mongoose.Schema;
 const CampgroundSchema = new Schema({
     title: String,
     location: String,
+    author: {
+        type: String,
+        ref: 'User'
+    },
     image: String,
     description: String,
     price: Number,
