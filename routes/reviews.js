@@ -13,6 +13,7 @@ router.post('/:id/reviews', isLoggedIn, validateReview, catchAsync(async(req, re
     const campground = await Campground.findById(req.params.id);
     const review = new Review(req.body.review);
     campground.reviews.push(review);
+    review.author = req.user._id;
     await review.save();
     await campground.save();
 
