@@ -3,18 +3,16 @@ const router = express.Router();
 const Campground = require('../models/campground/campground');
 const Review = require('../models/campground/review');
 const { reviewSchema } = require('../schemas');
-const { validateReview } = require('../middleware')
+const { validateReview, isLoggedIn } = require('../middleware')
 
 
 const catchAsync = require('../utils/catchAsync');
 
 
-router.post('/:id/reviews', validateReview, catchAsync(async(req, res, next) => {
-
+router.post('/:id/reviews', isLoggedIn, validateReview, catchAsync(async(req, res, next) => {
     const campground = await Campground.findById(req.params.id);
     const review = new Review(req.body.review);
     campground.reviews.push(review);
-
     await review.save();
     await campground.save();
 
