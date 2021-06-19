@@ -1,16 +1,16 @@
 const { campgroundSchema, reviewSchema } = require('./schemas')
 const ExpressError = require('./utils/ExpressError');
 const Campground = require('./models/campground/campground');
-const Review =
+const Review = require('./models/campground/review')
 
-    module.exports.isLoggedIn = (req, res, next) => {
-        if (!req.isAuthenticated()) {
-            req.session.returnTo = req.originalUrl;
-            req.flash('error', 'You Must be Logged In First!')
-            return res.redirect('/login')
-        }
-        next()
+module.exports.isLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        req.session.returnTo = req.originalUrl;
+        req.flash('error', 'You Must be Logged In First!')
+        return res.redirect('/login')
     }
+    next()
+}
 
 
 module.exports.isAuthor = async(req, res, nex) => {
@@ -29,6 +29,7 @@ module.exports.isReviewAuthor = async(req, res, nex) => {
         req.flash('error', "You don't have any permission!");
         return res.redirect(`/campgrounds/${id}`)
     }
+    next()
 }
 
 module.exports.validateCampground = (req, res, next) => {
