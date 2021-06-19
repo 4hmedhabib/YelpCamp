@@ -13,13 +13,14 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 
-module.exports.isAuthor = async(req, res, nex) => {
+module.exports.isAuthor = async(req, res, next) => {
     const { id } = req.params;
     const camp = await Campground.findById(id)
     if (!req.user._id.equals(camp.author)) {
         req.flash('error', "You don't have any permission!");
         return res.redirect(`/campgrounds/${id}`)
     }
+    next()
 }
 
 module.exports.isReviewAuthor = async(req, res, nex) => {
