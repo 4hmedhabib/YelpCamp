@@ -42,10 +42,19 @@
                 <div class="mx-2 my-3">
                     <h4 class="form-label">Leave a Review</h4>
                     <form action="/campgrounds/<%= campground._id%>/reviews" novalidate class="validated-form" method="POST">
-                        <div class="mb-2">
-                            <label for="rating" class="form-lebel">Rating: </label>
-                            <input type="range" name="review[rating]" class="form-range" max="5" min="0">
-                        </div>
+                        <fieldset class="starability-basic">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No review[rating]." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
                         <div class="mb-3">
                             <label for="body" class="form-lebel">Review: </label>
                             <textarea name="review[body]" id="body" cols="30" rows="5" class="form-control" required></textarea>
@@ -61,7 +70,6 @@
                                     By
                                     <%= review.author.username %>
                                 </h6>
-
                                 <p class="starability-result" data-rating="<%= review.rating %>">
                                     Rated:
                                     <%= review.rating %> stars
