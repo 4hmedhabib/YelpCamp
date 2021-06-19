@@ -26,7 +26,7 @@
                     <a class="btn btn-primary" href="/campgrounds">All Campgrounds</a>
                     <% if(currentUser && campground.author.equals(currentUser)){ %>
                         <a class="btn btn-warning text-white" href="/campgrounds/<%= campground._id %>/edit ">Edit</a>
-                        <form class="d-inline" action="/campgrounds/<%= campground._id %>/delete?_method=DELETE" method="POST">
+                        <form class="d-inline" action="/campgrounds/<%= campground._id %>/?_method=DELETE" method="POST">
                             <button class="btn btn-md btn-danger">Delete</button>
                         </form>
                         <% } %>
