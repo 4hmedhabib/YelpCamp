@@ -23,7 +23,7 @@ module.exports.isAuthor = async(req, res, next) => {
     next()
 }
 
-module.exports.isReviewAuthor = async(req, res, nex) => {
+module.exports.isReviewAuthor = async(req, res, next) => {
     const { id, reviewId } = req.params;
     const review = await Review.findById(reviewId)
     if (!req.user._id.equals(review.author)) {
