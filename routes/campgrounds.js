@@ -12,11 +12,9 @@ const { isLoggedIn, isAuthor, validateCampground } = require('../middleware')
 
 router.route('/')
     .get(campgrounds.index)
-    // .post(isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground))
-    .post(upload.array('image'), (req, res, ) => {
-        console.log(req.body)
-        res.send('it Works')
-    })
+    .post(isLoggedIn, upload.array('image'), validateCampground, catchAsync(campgrounds.createCampground))
+
+// })
 
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm));

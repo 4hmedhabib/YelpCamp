@@ -3,7 +3,33 @@
     <div class="row mb-5">
         <div class="col-6" mb-5>
             <div class="card">
-                <img src=" <%= campground.image %>" alt=" <%= campground.title %>" class="card-img-top">
+                <div id="campgroundCrousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+                    <div class="carousel-inner">
+                        <% campground.images.forEach((img, i) => { %>
+                            <div class="carousel-item <%= i === 0 ? 'active' : ''  %> ">
+                                <img src="<%= img.url %>" class="d-block w-100" alt="<%= campground.title %> ">
+                            </div>
+                            <% }) %>
+
+                    </div>
+                    <% if(campground.images.length > 1){ %>
+                        <div class="carousel-indicators">
+                            <% campground.images.forEach((img, i) => { %>
+                                <button type="button" data-bs-target="#campgroundCrousel" data-bs-slide-to="<%= i%> " class="active" aria-current="true" aria-label="Slide 1">
+                            </button>
+                                <% }) %>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#campgroundCrousel" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#campgroundCrousel" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                        <% } %>
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">
                         <%= campground.title %>
