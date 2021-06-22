@@ -13,10 +13,11 @@
                             <% }) %>
 
                     </div>
+
                     <% if(campground.images.length > 1){ %>
                         <div class="carousel-indicators">
                             <% campground.images.forEach((img, i) => { %>
-                                <button type="button" data-bs-target="#campgroundCrousel" data-bs-slide-to="<%= i%> " class="active" aria-current="true" aria-label="Slide 1">
+                                <button type="button" data-bs-target="#campgroundCrousel" data-bs-slide-to="<%=i%>" class="<%= i === 0 ? 'active' : ''  %>" aria-current="<%= i === 0 ? 'true' : ''  %>" aria-label="<%= img.filename %>">
                             </button>
                                 <% }) %>
                         </div>
@@ -113,4 +114,5 @@
                         </div>
                         <% } %>
         </div>
+
     </div>
