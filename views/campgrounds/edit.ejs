@@ -39,11 +39,22 @@
                         Please fill  the description.
                     </div>
                 </div>
+                <div class="mb-3 ">
+                    <% campground.images.forEach((img, i)=>{ %> 
+                        <img src="<%=img.url %>" alt="
+                    <%= campground.title, i %>" class="img-thumbnail">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="deleteImages[]" value="<%=img.filename %>" id="<%= i %>">
+                            <label class="form-check-label" for="<%= i %>">Delete?
+                            </label>
+                        </div>
+                        <% }) %>
+                </div>
                 <button class="btn btn-info mb-3 ">Update Campground</button>
             </form>
 
             <footer>
                 <a class="btn btn-warning " href="/campgrounds/<%=campground._id%>">Back</a>
-                    </footer>
-                </div>
+            </footer>
         </div>
+    </div>
