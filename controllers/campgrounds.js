@@ -53,6 +53,10 @@ module.exports.renderEditForm = async(req, res, next) => {
 };
 
 module.exports.updateCampground = async(req, res, next) => {
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.campground.location,
+        limit: 1
+    }).send();
     const { id } = req.params;
     const editCamp = await Campground.findByIdAndUpdate(id, req.body.campground, { runValidators: true });
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
@@ -63,6 +67,12 @@ module.exports.updateCampground = async(req, res, next) => {
             await cloudinary.uploader.destroy(filename)
         }
         await editCamp.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+    }
+    if (req.body.campground.location === campground.location) {
+        console.log('UPDATE RUNNING!!!')
+        await campground.updateOne({ $set: { geometry: geoData.body.features[0].geometry } })
+    } else {
+        console.log('UPDATE NOT RUNNING!!!')
     }
     if (!editCamp) {
         req.flash('error', "Can't Find that Campground!");

@@ -1,14 +1,16 @@
 <% layout('./layouts/boilerplate') %>
+    <div id="map" style="width: 100%; height: 50vh;"></div>
+
     <h1>All Campgrounds</h1>
 
     <ul class="my-3">
         <% for (let campground of campgrounds){ %>
+
             <div class="card mb-3">
                 <div class="row">
                     <% if(campground.images.length){ %>
                         <div class="col-md-4">
                             <img src="<%= campground.images[0].url %> " alt="<%= campground.title %>" class="img-fluid">
-
                         </div>
                         <% } %>
                             <div class="col-md-8">
@@ -29,3 +31,12 @@
             </div>
             <% } %>
     </ul>
+
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const campgrounds = {
+            features: <%- JSON.stringify(campgrounds)%>
+        }
+    </script>
+
+    <script src="/js/clusterMap.js"></script>
