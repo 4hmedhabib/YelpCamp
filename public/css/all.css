@@ -1,0 +1,8 @@
+#btn-reset {
+    outline: none;
+    border: none;
+}
+
+button#btn-reset:active {
+    outline: none;
+}

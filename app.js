@@ -67,25 +67,27 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 
-// Routes
-// ==========
-app.get('/', (req, res) => {
-    res.send('HOME PAGE');
-});
-
-
-
 // Flash Middle Ware
 app.use((req, res, next) => {
+    console.log(req.user)
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
-})
+});
+// Routes
+// ==========
+app.get('/', (req, res) => {
+    res.render('home')
+});
+
+
+
+
 
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds', reviewRoutes);
-app.use('/', userRoutes)
+app.use('/', userRoutes);
 
 app.get('/logout', (req, res) => {
     req.logout();

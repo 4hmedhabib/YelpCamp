@@ -1,18 +1,28 @@
 <% layout('./layouts/boilerplate') %>
-    <h1>Login</h1>
-    <form action="/login" method="post" novalidate class="validated-form">
-        <div class="mb-3">
-            <label class="form-label" for="username">Username</label>
-            <input class="form-control" type="text" name="username" id="username " required>
-            <div class="invalid-feedback ">
-                Please fill the Username.
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="password">Password</label>
-                <input class="form-control" type="password" name="password" id="password " required>
-                <div class="invalid-feedback ">
-                    Please fill the Password.
+
+
+
+    <div class="container d-flex justify-content-center align-items-center mt-5">
+
+        <div class="col-md-6 col-xl-6 col-md-9 col-11">
+            <div class="row card shadow r-5">
+                <h1 class="text-center my-3">Login</h1>
+                <form action="/login" method="post" novalidate class="validated-form">
+                    <div class="mb-3">
+                        <label class="form-label" for="username">Username</label>
+                        <input class="form-control" type="text" name="username" id="username " required>
+                        <div class="invalid-feedback ">
+                            Please fill the Username.
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" type="password" name="password" id="password " required>
+                            <div class="invalid-feedback ">
+                                Please fill the Password.
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Login</button>
+                </form>
                 </div>
             </div>
-            <button class="btn btn-primary">Login</button>
-    </form>
+        </div>
