@@ -39,6 +39,7 @@
                     <p class="card-text">
                         <%= campground.description %>
                     </p>
+
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><small class="text-muted"><%= campground.location %></small></li>
@@ -99,6 +100,7 @@
                                     By
                                     <%= review.author.username %>
                                 </h6>
+                                <span class="lead"><%=moment(review.createdAt).fromNow() %> </span>
                                 <p class="starability-result" data-rating="<%= review.rating %>">
                                     Rated:
                                     <%= review.rating %> stars

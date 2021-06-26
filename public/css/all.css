@@ -6,3 +6,7 @@
 button#btn-reset:active {
     outline: none;
 }
+
+.username {
+    border-radius: 50px;
+}
