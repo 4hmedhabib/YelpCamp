@@ -36,6 +36,7 @@
                     <h5 class="card-title">
                         <%= campground.title %>
                     </h5>
+
                     <p class="card-text">
                         <%= campground.description %>
                     </p>
@@ -46,7 +47,8 @@
                     <li class="list-group-item">
                         <b class="text-muted">Submited By:
                             <%= campground.author.username %>
-                        </b>
+                        </b> <br>
+                        <small class="text-muted text-weight-bold"><%=moment(campground.createdAt).fromNow() %> </small>
                     </li>
                     <li class="list-group-item">$
                         <%=campground.price%>/night
